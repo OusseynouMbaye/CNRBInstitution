@@ -1,8 +1,24 @@
-﻿namespace CNRBInstitution.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CNRBInstitution.Domain.Entities
 {
-    public record Employee (int EmployeId, string FirstName,string Lastname);
-    public record Country (int CountryId, string Name);
- 
+    public class Employee(string firstName, string lastName)
+    {
+        [Key]
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; } 
+        public string LastName { get; set; } 
+
+        public MaritalStatus MaritalStatus { get; set; }
+
+        public int CountryId { get; set; }
+        public Country Country { get; set; }
+
+    }
+
+
+
+
 }
 
 /*-ProjectName
@@ -23,4 +39,18 @@
   - Presentation
     - Controllers
     - Views
+*/
+
+/* public class Employee
+    {
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public Employee(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+    }
 */

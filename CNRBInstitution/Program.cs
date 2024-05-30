@@ -1,5 +1,8 @@
+using CNRBInstitution.Infrastructure.Context;
+using CNRBInstitution.Infrastructure.Repositories;
 using CNRBInstitution.Services;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<CnrbInstitutionContext>(dbContextOptions =>
+{
+    dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:CnrbInstitutionDbConnectionString"]);
+});
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 var app = builder.Build();
 
